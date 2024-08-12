@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StatusBar } from 'react-native';
+import { Dimensions, Platform, StatusBar } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { func } from './src/constants';
 
@@ -8,6 +8,14 @@ import RootStack from './src/navigation/RootStack';
 
 // app context state
 import AppState from './src/context/AppState';
+
+// Web App entry point component
+import WebHome from './src/WebView/WebHome';
+
+const { width } = Dimensions.get('window');
+
+const isMobile = width <= 768;
+const isWeb = Platform.OS === 'web';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -46,11 +54,17 @@ function App() {
     return null;
   }
 
+  const getAppComponent = () => {
+    if (isWeb) {
+      return isMobile ? <RootStack /> : <WebHome />;
+    }
+    return <RootStack />; // Returns the mobile entry component if not viewed on a web OS
+  };
+
   return (
     <AppState>
       <StatusBar barStyle="light-content" />
-
-      <RootStack />
+      {getAppComponent()}
     </AppState>
   );
 }

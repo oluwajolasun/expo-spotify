@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, Platform, StyleSheet, View } from 'react-native';
 import { device, gStyle } from '../constants';
 
 // components
@@ -11,7 +11,7 @@ import yourLibrary from '../mockdata/menuYourLibrary.json';
 
 function Library() {
   return (
-    <View style={gStyle.container}>
+    <View style={[gStyle.container, styles.homeCardBg]}>
       <View style={styles.containerHeader}>
         <ScreenHeader title="Your Library" />
       </View>
@@ -38,6 +38,16 @@ const styles = StyleSheet.create({
     top: 0,
     width: '100%',
     zIndex: 10
+  },
+
+  homeCardBg: {
+    ...Platform.select({
+      web: {
+        backgroundColor: '#121212',
+        borderRadius: 8,
+        margin: 8
+      }
+    })
   },
   containerFlatlist: {
     marginTop: device.iPhoneNotch ? 88 : 64

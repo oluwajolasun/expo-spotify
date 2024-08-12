@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { BlurView } from 'expo-blur';
 import { Feather } from '@expo/vector-icons';
@@ -51,7 +51,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: 16,
     paddingHorizontal: 24,
-    paddingTop: device.iPhoneNotch ? 48 : 24
+    paddingTop: device.iPhoneNotch ? 48 : 24,
+    ...Platform.select({
+      web: {
+        borderRadius: 15
+      }
+    })
   },
   containerText: {
     ...gStyle.flex5,

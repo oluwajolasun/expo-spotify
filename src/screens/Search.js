@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Animated,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Animated, StyleSheet, Text, View, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { colors, device, gStyle } from '../constants';
 
@@ -14,13 +8,22 @@ import PlaylistItem from '../components/PlaylistItem';
 import TouchIcon from '../components/TouchIcon';
 
 // icons
-import SvgSearch from '../icons/Svg.Search';
+// import SvgSearch from '../icons/Svg.Search';
 
 // mock data
 import browseAll from '../mockdata/searchBrowseAll.json';
 import topGenres from '../mockdata/searchTopGenres.json';
 
+// using albums as mock
+import albums from '../mockdata/albums';
+
+// Modified AlbumsHorizontal to create TracksHorizontal for search functioinality
+import TracksHorizontal from '../WebView/TracksHorizontal';
+
 function Search() {
+  const [searchQuery, setSearchQuery] = React.useState();
+  const [searchedSongs, setSearchedSongs] = React.useState([]);
+
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   // search start (24 horizontal padding )
@@ -32,6 +35,32 @@ function Search() {
     outputRange: [searchStart, searchEnd],
     extrapolate: 'clamp'
   });
+
+  const handleSearch = (text) => {
+    setSearchQuery(text);
+    if (text) {
+      const searched = [];
+
+      Object.keys(albums).forEach((albumKey) => {
+        const album = albums[albumKey];
+        album.tracks.forEach((track) => {
+          if (track.title.toLowerCase().includes(text.toLowerCase())) {
+            searched.push({
+              album: album.title,
+              artist: album.artist,
+              trackTitle: track.title,
+              image: album.image,
+              id: `${albumKey}-${track.title}`
+            });
+          }
+        });
+      });
+
+      setSearchedSongs(searched);
+    } else {
+      setSearchedSongs([]);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -48,20 +77,19 @@ function Search() {
         <View style={gStyle.spacer11} />
         <View style={styles.containerSearchBar}>
           <Animated.View style={{ width: opacity }}>
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={() => null}
+            <TextInput
               style={styles.searchPlaceholder}
-            >
-              <View style={gStyle.mR1}>
-                <SvgSearch />
-              </View>
-              <Text style={styles.searchPlaceholderText}>
-                Artists, songs or podcasts
-              </Text>
-            </TouchableOpacity>
+              placeholder="Search for tracks"
+              placeholderTextColor={colors.blackBg}
+              onChangeText={handleSearch}
+              value={searchQuery || ''}
+            />
           </Animated.View>
         </View>
+
+        {searchedSongs.length > 0 && (
+          <TracksHorizontal data={searchedSongs} heading="Search Results" />
+        )}
 
         <Text style={styles.sectionHeading}>Your top genres</Text>
         <View style={styles.containerRow}>
@@ -122,10 +150,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: 16,
     paddingVertical: 16
-  },
-  searchPlaceholderText: {
-    ...gStyle.textSpotify16,
-    color: colors.blackBg
   },
   sectionHeading: {
     ...gStyle.textSpotifyBold18,

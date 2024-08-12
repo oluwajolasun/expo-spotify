@@ -248,12 +248,12 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   headerTitle: {
+    flex: 1, // Updated this to a flex from a width due to responsiveness on web
     ...gStyle.textSpotifyBold16,
     color: colors.white,
     marginTop: 2,
     paddingHorizontal: 8,
-    textAlign: 'center',
-    width: device.width - 100
+    textAlign: 'center'
   },
   containerFixed: {
     alignItems: 'center',

@@ -43,7 +43,7 @@ function Home() {
         )}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
-        style={gStyle.container}
+        style={[gStyle.container, styles.homeCardBg]}
       >
         <View style={gStyle.spacer16} />
 
