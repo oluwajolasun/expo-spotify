@@ -2,20 +2,6 @@
 
 web demo: [Expo Spotify](https://expo-spotify.vercel.app)
 
-[![follow @calebnance](https://img.shields.io/twitter/follow/calebnance.svg?style=for-the-badge&logo=TWITTER&logoColor=FFFFFF&labelColor=00aced&logoWidth=20&color=lightgray)](https://twitter.com/calebnance)
-
-<p align="center">
-  <img src="screenshots/screenshare-4.jpg?raw=true" />
-</p>
-
-## Table of Contents
-
-- [Install & Build](#install--build)
-- [Features](#features)
-- [Linting](#linting)
-- [Expo Web](#expo-web)
-- [Release Notes](#release-notes)
-
 ## Install & Build
 
 First, make sure you have Expo CLI installed: `npm install -g expo-cli`
@@ -32,36 +18,7 @@ yarn
 yarn dev
 ```
 
-## Features
 
-- Expo SDK 48
-- iOS, Android and PWA (Web App)
-- React Navigation v6
-- React Context
-- PropTypes
-
-## Linting
-
-- run: `yarn lint` for a list of linting warnings/error in cli
-- prettier and airbnb config
-- make sure you have [prettier package](https://atom.io/packages/prettier-atom) installed on your atom/vscode editor
-- then make sure to enable these options (packages → prettier):
-  - eslint integration
-  - stylelint integration
-  - automatic format on save (toggle format on save)
-- be aware of the `.prettierignore` file
-
-**Update Linting Packages:**
-
-```
-yarn add @babel/core eslint-config-airbnb eslint-config-prettier eslint-plugin-import eslint-plugin-import-helpers eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-native prettier --dev
-```
-
-## Expo Web
-
-Currently Expo Web support is **not production ready**, but if you want to see how this project looks on the web as a PWA (Progressive Web App)... using [react-native-web](https://github.com/necolas/react-native-web) and react-dom.
-
-[PWA: Expo Spotify](https://expo-spotify.calebnance.now.sh) looks best on a mobile device, but not bad on desktop!
 
 **Dev with Expo Web**
 
@@ -78,64 +35,13 @@ a couple manual changes within `index.html` i found needed to be made so far:
 - **check output meta:** double image meta tags
 - **check output js:** double/triple js packages
 
-## Release Notes
 
-**version 0.5.0 (current)**
 
-- upgraded to [Expo SDK 48](https://blog.expo.dev/expo-sdk-48-ccb8302e231)
-- upgraded to [Expo SDK 47](https://blog.expo.dev/expo-sdk-47-a0f6f5c038af)
-- upgraded to [Expo SDK 46](https://blog.expo.dev/expo-sdk-46-c2a1655f63f7)
-- upgraded to [Expo SDK 45](https://blog.expo.dev/expo-sdk-45-f4e332954a68)
-- upgraded to [React Navigation v6](https://reactnavigation.org/docs/getting-started)
-- upgraded to [React Navigation v5](https://reactnavigation.org/docs/5.x/getting-started)
-- Removed ScreenProps for [React Context](https://reactjs.org/docs/context.html)
+## Task Completed
 
-**version 0.4.0**
+Pretty much all the tasks were completed except from viewing liked songs in library and creating a playlist, which can be implemented with more time understanding the code base and the current states of liked songs.
 
-- upgraded to [Expo SDK 44](https://blog.expo.dev/expo-sdk-44-4c4b8306584a)
-- upgraded to [Expo SDK 43](https://blog.expo.dev/expo-sdk-43-aa9b3c7d5541)
-- upgraded to [Expo SDK 42](https://blog.expo.io/expo-sdk-42-579aee2348b6)
+I have worked with the spotify api, for a personal spotify project which can be viewed on my portfolio, but I need to update the api keys and access token on the backend. As someone who uses
+spotify frequently I have a good understanding of how its interface works and also using dev tools to understand some of the positioning.
 
-**version 0.3.0**
-
-- upgraded to [Expo SDK 41](https://blog.expo.io/expo-sdk-41-12cc5232f2ef)
-- upgraded to [Expo SDK 40](https://blog.expo.io/expo-sdk-40-is-now-available-d4d73e67da33)
-- upgraded to [Expo SDK 39](https://blog.expo.io/expo-sdk-39-is-now-available-4c10aa825e3f)
-- upgraded to [Expo SDK 38](https://blog.expo.io/expo-sdk-38-is-now-available-ab6cd30ca2ee)
-
-**version 0.2.0**
-
-- upgraded to [React Navigation v4](https://reactnavigation.org/docs/4.x/getting-started)
-- upgraded to [Expo SDK 37](https://blog.expo.io/expo-sdk-37-is-now-available-dd5770f066a6)
-- upgraded to [Expo SDK 36](https://blog.expo.io/expo-sdk-36-is-now-available-b91897b437fe)
-- upgraded to [Expo SDK 35](https://blog.expo.io/expo-sdk-35-is-now-available-beee0dfafbf4)
-
-**version 0.1.0**
-
-- Expo Web support
-- upgraded to [Expo SDK 34](https://blog.expo.io/expo-sdk-34-is-now-available-4f7825239319)
-- upgraded to [Expo SDK 33](https://blog.expo.io/expo-sdk-v33-0-0-is-now-available-52d1c99dfe4c)
-- started with [React Navigation v3](https://reactnavigation.org/docs/3.x/getting-started)
-- iOS and Android
-- Tab Navigation (stacks created)
-  - Home
-    - Horizontal Album component
-    - Album Screen
-      - animation opacity on header
-      - scroll sticky of shuffle button
-      - current song playing shows in album list view
-    - Album More Options (added by [@bidah](https://github.com/bidah))
-      - blur view
-      - SafeAreaView example
-      - action list with supporting icons
-    - Header animation on scroll event
-      - animation opacity on iPhoneX notch
-      - animation opacity on cog icon
-  - Search
-    - Sticky search bar (animated width)
-    - Playlists sections added (with mock data)
-  - Library
-    - Menu items from mock data
-  - Custom Bar for Music Player added to `<BottomTabBar />`
-- Modals (bottom to top)
-  - Music Player
+The application would have the same same layout for desktop and most tablets, but when viewed on a web client even using the dev tools for a mobile view, it with still render the mobile version even on web based on the screen width, this was the best way I approached having a responsive design, navigation was done rendering different screen stacks to a view component based on navigation done on the side bar to those screen. Overall this was a fun assessment and would definitely visit this even after the submission 
