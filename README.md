@@ -1,6 +1,6 @@
 # Spotify: UI Clone with React Native / Expo
 
-web demo: [Expo Spotify](https://expo-spotify.vercel.app)
+web demo: [Expo Spotify](https://spotify-expo-oluwajolasun.netlify.app)
 
 ## Install & Build
 
